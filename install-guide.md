@@ -429,9 +429,10 @@ cp -r agent-system/hooks/* .claude/hooks/
 echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
 source .env
 
-# IMPORTANT: Update Claude settings to use ./.claude/hooks instead of agent-system/hooks
+# IMPORTANT: Update Claude settings to use absolute paths
 # Edit ~/.claude/settings.json or .claude/settings.json and replace:
-# "python agent-system/hooks/" with "python ./.claude/hooks/"
+# "python agent-system/hooks/" with "python /full/path/to/project/.claude/hooks/"
+# Or use: "python $(pwd)/.claude/hooks/" for dynamic path resolution
 ```
 
 #### 6. Virtual Environment Issues
