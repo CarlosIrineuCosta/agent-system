@@ -12,7 +12,24 @@ import json
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+# Handle __file__ potentially being undefined when run as a hook command
+if '__file__' in globals():
+    PROJECT_ROOT = Path(__file__).parent.parent.parent
+else:
+    # Assume we're running from the project root or hooks are in .claude/hooks
+    PROJECT_ROOT = Path.cwd()
+    if (PROJECT_ROOT / ".claude" / "hooks").exists():
+        # We're in the project root
+        pass
+    else:
+        # Try to find the project root by looking for .claude directory
+        current = PROJECT_ROOT
+        while current != current.parent:
+            if (current / ".claude").exists():
+                PROJECT_ROOT = current
+                break
+            current = current.parent
+
 STATE_FILE = PROJECT_ROOT / ".claude" / "state" / "session_state.json"
 POSTBOX = PROJECT_ROOT / ".postbox"
 
@@ -51,12 +68,18 @@ def check_documentation():
 def check_linting(changed_files):
     """Run linters on changed files."""
     import subprocess
-    
+
     for file in changed_files:
         if file.endswith('.py'):
+            # Check if the file exists (might be a symlink)
+            file_path = PROJECT_ROOT / file
+            if not file_path.exists():
+                # Skip linting for files that don't exist (e.g., broken symlinks)
+                continue
+
             # Run ruff
             result = subprocess.run(
-                ['ruff', 'check', file],
+                ['ruff', 'check', str(file_path)],
                 capture_output=True,
                 text=True,
                 cwd=PROJECT_ROOT

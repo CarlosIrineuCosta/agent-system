@@ -15,9 +15,25 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-# Project configuration
-# Calculate project root relative to the hook location
-PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
+# Handle __file__ potentially being undefined when run as a hook command
+if '__file__' in globals():
+    # Calculate project root relative to the hook location
+    PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
+else:
+    # Assume we're running from the project root or hooks are in .claude/hooks
+    PROJECT_ROOT = Path.cwd()
+    if (PROJECT_ROOT / ".claude" / "hooks").exists():
+        # We're in the project root
+        pass
+    else:
+        # Try to find the project root by looking for .claude directory
+        current = PROJECT_ROOT
+        while current != current.parent:
+            if (current / ".claude").exists():
+                PROJECT_ROOT = current
+                break
+            current = current.parent
+
 STATE_FILE = PROJECT_ROOT / ".claude" / "state" / "session_state.json"
 HOOKS_LOG_FILE = PROJECT_ROOT / ".claude" / "state" / "hooks_log.json"
 

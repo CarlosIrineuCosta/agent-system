@@ -13,7 +13,7 @@ from pathlib import Path
 
 # Configuration
 PROJECT_ROOT = Path(__file__).parent.parent.parent
-COORDINATION_FILE = PROJECT_ROOT / "COORDINATION.md"
+COORDINATION_FILE = PROJECT_ROOT / "docs" / "coordination" / "COORDINATION.md"
 TASKS_FILE = PROJECT_ROOT / ".agents" / "tasks.json"
 REVIEWS_DIR = PROJECT_ROOT / ".agents" / "reviews"
 AI_AGENT_SCRIPT = PROJECT_ROOT / "scripts" / "agents" / "ai-agent.sh"

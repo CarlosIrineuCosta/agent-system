@@ -594,7 +594,7 @@ export SESSION_TRACKING=true
 ### Documentation
 - Main documentation: `README.md`
 - Validation guide: `docs/VALIDATION_SCRIPT.md`
-- Agent coordination: `docs/COORDINATION.md`
+- Agent coordination: `docs/coordination/COORDINATION.md`
 
 ### Support Commands
 ```bash
@@ -628,6 +628,6 @@ python3 scripts/multi_llm_coordinator.py --tasks "backend,frontend,docs"
 1. **Validate Installation**: Run `./agent-system/validate.py`
 2. **Configure Environment**: Edit `.env` file with API keys
 3. **Start Development**: Use `claude` CLI or run agents directly
-4. **Monitor Progress**: Check `COORDINATION.md` and `AGENT_SUMMARY.md`
+4. **Monitor Progress**: Check `docs/coordination/COORDINATION.md` and `docs/coordination/AGENT_SUMMARY.md`
 
 **Quick Reference**: The system is now ready for multi-agent development workflows with automatic quality gates and agent coordination.
