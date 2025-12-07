@@ -430,8 +430,14 @@ echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
 source .env
 
 # IMPORTANT: Update Claude settings to use absolute paths
+# Option 1: Manual edit
 # Edit ~/.claude/settings.json or .claude/settings.json and replace:
 # "python agent-system/hooks/" with "python /full/path/to/project/.claude/hooks/"
+
+# Option 2: Automated fix (RECOMMENDED)
+# Run the included fix script:
+python agent-system/scripts/fix_hook_paths.py
+
 # Or use: "python $(pwd)/.claude/hooks/" for dynamic path resolution
 ```
 
