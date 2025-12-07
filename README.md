@@ -82,6 +82,17 @@ The system employs a multi-agent architecture with distinct roles and responsibi
    python scripts/setup_hooks.sh
    ```
 
+5. **CRITICAL: Enable Slash Commands** (Required for /start, /end, /api, etc.)
+   ```bash
+   # Copy hooks and commands to project directory
+   mkdir -p .claude/hooks .claude/commands
+   cp -r hooks/* .claude/hooks/
+   cp -r commands/* .claude/commands/
+
+   # Set required environment variable
+   echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
+   ```
+
 ### Configuration Files
 
 - **`/config/hooks_settings.json`**: Hook configuration for quality control

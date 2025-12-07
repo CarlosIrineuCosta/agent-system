@@ -46,6 +46,15 @@ chmod +x validate.py && ./validate.py
 - Validates installation
 - Generates setup instructions
 
+**IMPORTANT MANUAL STEPS** (required for slash commands to work):
+```bash
+# After running setup_hooks.sh, you MUST also run:
+mkdir -p .claude/hooks .claude/commands
+cp -r agent-system/hooks/* .claude/hooks/
+cp -r agent-system/commands/* .claude/commands/
+echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
+```
+
 ### 2. Manual Installation Commands
 
 #### Project Structure Creation
@@ -240,13 +249,18 @@ cp config/.env.example .env
 nano .env  # or your preferred editor
 ```
 
-### Step 6: Setup Claude Code Integration (Optional)
+### Step 6: Setup Claude Code Integration (Required for Slash Commands)
 
 ```bash
 # Copy Claude configuration
 mkdir -p ~/.claude
 cp config/hooks_settings.json ~/.claude/hooks_settings.json
 cp config/agent_routing.json ~/.claude/agent_routing.json
+
+# IMPORTANT: Copy hooks and commands to project .claude directory
+mkdir -p .claude/hooks .claude/commands
+cp -r hooks/* .claude/hooks/
+cp -r commands/* .claude/commands/
 ```
 
 ### Step 7: Create Project Structure
@@ -395,7 +409,28 @@ ln -sf "$(pwd)" agent-system
 find scripts -name "*.py" -exec ln -sf "../agent-system/$(basename {})" {} \;
 ```
 
-#### 5. Virtual Environment Issues
+#### 5. Slash Commands Not Working (/start, /end, etc.)
+```bash
+# Check if commands directory exists
+ls -la .claude/commands/
+
+# If missing, copy commands
+mkdir -p .claude/commands
+cp -r agent-system/commands/* .claude/commands/
+
+# Check if hooks directory exists
+ls -la .claude/hooks/
+
+# If missing, copy hooks
+mkdir -p .claude/hooks
+cp -r agent-system/hooks/* .claude/hooks/
+
+# Set required environment variable
+echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
+source .env
+```
+
+#### 6. Virtual Environment Issues
 ```bash
 # Rebuild virtual environment
 rm -rf venv

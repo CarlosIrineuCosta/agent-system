@@ -93,6 +93,14 @@ cat > agent-system/config/unified_config.json << 'EOF'
 }
 EOF
 
+# CRITICAL: Enable Slash Commands (/start, /end, /api, etc.)
+mkdir -p .claude/hooks .claude/commands
+cp -r agent-system/hooks/* .claude/hooks/
+cp -r agent-system/commands/* .claude/commands/
+
+# Set required environment variable
+echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
+
 # Update Claude Code hooks configuration
 # User must manually update Claude Code settings to point to:
 # agent-system/hooks/ for PostToolUse and Stop hooks
