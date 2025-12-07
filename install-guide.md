@@ -428,6 +428,10 @@ cp -r agent-system/hooks/* .claude/hooks/
 # Set required environment variable
 echo "export CLAUDE_TRUSTED_WORKSPACE=$(pwd)" >> .env
 source .env
+
+# IMPORTANT: Update Claude settings to use ./.claude/hooks instead of agent-system/hooks
+# Edit ~/.claude/settings.json or .claude/settings.json and replace:
+# "python agent-system/hooks/" with "python ./.claude/hooks/"
 ```
 
 #### 6. Virtual Environment Issues
