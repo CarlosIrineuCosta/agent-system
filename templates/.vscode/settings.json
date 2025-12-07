@@ -1,0 +1,20 @@
+{
+  "python.defaultInterpreterPath": "./agent-system/scripts/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules": true
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "terminal.integrated.cwd": "${workspaceFolder}",
+  "claude.agentSystem.enabled": true,
+  "claude.agentSystem.path": "./agent-system"
+}

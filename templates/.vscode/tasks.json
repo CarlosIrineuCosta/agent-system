@@ -1,0 +1,55 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run GLM Worker",
+      "type": "shell",
+      "command": "python",
+      "args": ["agent-system/scripts/glm_worker.py", "--task", "${input:taskDescription}"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Run Multi-LLM Coordinator",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "agent-system/scripts/multi_llm_coordinator.py",
+        "--task", "${input:taskDescription}",
+        "--files", "${input:files}"
+      ],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "System Review",
+      "type": "shell",
+      "command": "./agent-system/scripts/review_entire_system.sh",
+      "group": "test"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "taskDescription",
+      "description": "Task description",
+      "default": "",
+      "type": "promptString"
+    },
+    {
+      "id": "files",
+      "description": "Comma-separated list of files",
+      "default": "",
+      "type": "promptString"
+    }
+  ]
+}
