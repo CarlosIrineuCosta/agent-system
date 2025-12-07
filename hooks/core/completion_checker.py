@@ -79,10 +79,15 @@ def check_linting(changed_files):
 
 def main():
     """Main hook: Check if we're really done."""
-    try:
-        tool_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
-        sys.exit(0)
+    # Check if there's data on stdin (for Stop hooks, there won't be)
+    import select
+    if select.select([sys.stdin], [], [], 0.0)[0]:
+        try:
+            tool_data = json.load(sys.stdin)
+        except json.JSONDecodeError:
+            tool_data = None
+    else:
+        tool_data = None
     
     # Get changed files from git
     import subprocess

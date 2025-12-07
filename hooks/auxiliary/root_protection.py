@@ -12,10 +12,15 @@ from pathlib import Path
 
 def parse_tool_input():
     """Parse tool input from stdin"""
-    try:
-        tool_data = json.load(sys.stdin)
-        return tool_data
-    except json.JSONDecodeError:
+    # Check if there's data on stdin
+    import select
+    if select.select([sys.stdin], [], [], 0.0)[0]:
+        try:
+            tool_data = json.load(sys.stdin)
+            return tool_data
+        except json.JSONDecodeError:
+            return None
+    else:
         return None
 
 def check_root_violation(tool_input):

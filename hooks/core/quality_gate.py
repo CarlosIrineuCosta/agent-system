@@ -237,9 +237,14 @@ Return your review in this format:
 
 def main():
     """Main hook: Review changes with different LLM with session state integration."""
-    try:
-        tool_data = json.load(sys.stdin)
-    except json.JSONDecodeError:
+    # Check if there's data on stdin
+    import select
+    if select.select([sys.stdin], [], [], 0.0)[0]:
+        try:
+            tool_data = json.load(sys.stdin)
+        except json.JSONDecodeError:
+            sys.exit(0)
+    else:
         sys.exit(0)
 
     tool_input = tool_data.get('tool_input', {})
