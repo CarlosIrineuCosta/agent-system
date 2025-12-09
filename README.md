@@ -1,82 +1,100 @@
-# Agent System
+# Lumen Project
 
-A comprehensive multi-agent development system designed for coordinated software engineering workflows. This system provides structured coordination between an orchestrator (Claude) and multiple specialized agents.
+A comprehensive image processing and storage management system with modern architecture and agent-based development workflow.
 
-## Architecture Overview
+## Quick Start
 
-The Agent System implements a hierarchical coordination model with distinct roles:
+This project uses an external **agent-system** dependency for development workflow management. The agent-system provides structured coordination between development tasks and quality assurance processes.
+
+### Agent System Integration
+
+**Important**: The agent-system is now managed as an external dependency, not as a Git submodule.
+
+#### Setup Agent System
+
+1. **Clone the agent-system repository**:
+   ```bash
+   # Clone to your preferred external location
+   git clone https://github.com/CarlosIrineuCosta/agent-system.git ~/agent-system
+   ```
+
+2. **Install and configure hooks**:
+   ```bash
+   cd ~/agent-system
+   ./scripts/setup_hooks.sh /path/to/your/lumen/project
+   ```
+
+3. **Validate installation**:
+   ```bash
+   cd ~/agent-system
+   python3 validate.py --project /path/to/your/lumen/project
+   ```
+
+#### Agent System Features
+
+The external agent-system provides:
+- **Multi-agent coordination**: Structured task delegation and management
+- **Quality gates**: Automated validation and code review processes
+- **Session tracking**: Development session state management
+- **Hook system**: Pre/post-operation validation and quality checks
+- **Agent routing**: Intelligent task assignment to specialized agents
+
+## Lumen Architecture
 
 ### Core Components
 
-1. **Orchestrator (Claude)**: High-level coordination and decision-making
-   - Manages overall project workflow
-   - Delegates tasks to specialized agents
-   - Ensures quality and consistency across implementations
+1. **Backend API**: FastAPI-based REST service
+2. **Frontend Interface**: Modern web UI
+3. **Image Processing**: Advanced image manipulation and storage
+4. **Database Layer**: PostgreSQL with SQLAlchemy ORM
+5. **Agent Integration**: External agent-system for development workflow
 
-2. **Specialized Agents**: Domain-specific implementers
-   - Handle specific technical domains (backend, frontend, DevOps, etc.)
-   - Operate with well-defined interfaces and constraints
-   - Maintain autonomy within their specialized domains
+### Development Workflow
 
-3. **Coordination Framework**: Structured communication layer
-   - Standardized interfaces between agents
-   - Quality gates and validation mechanisms
-   - Progress tracking and completion verification
+1. **Set up external agent-system** (see above)
+2. **Initialize project environment**:
+   ```bash
+   cd lumen
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+3. **Configure environment**:
+   ```bash
+   cp .env.example .env
+   # Edit .env with your configuration
+   ```
+4. **Run development server**:
+   ```bash
+   python3 main.py
+   ```
 
-### System Characteristics
+## Project Structure
 
-- **Modular Design**: Each agent operates independently within its domain
-- **Structured Communication**: Well-defined interfaces and protocols
-- **Quality Assurance**: Built-in validation and quality gates
-- **Scalable Architecture**: Easy to add new specialized agents
-- **Process Transparency**: Clear workflow visibility and audit trails
-
-## System Validation
-
-The enhanced validation script (`validate.py`) provides comprehensive system health checks:
-
-### Running Validation
-```bash
-cd agent-system
-python3 validate.py
+```
+lumen/
+├── backend/           # FastAPI backend service
+├── frontend/          # Web interface
+├── docs/             # Project documentation
+├── scripts/          # Utility scripts
+├── config/           # Configuration files
+└── storage/          # Image processing and storage
 ```
 
-### Validation Coverage
-- Directory structure validation
-- Dependency checking and installation
-- Script syntax and import validation
-- Hook functionality testing
-- Configuration file validation
-- Agent communication testing
-- Session state functionality
-- Symlink validation
-- Cross-agent review system
-- Permission checking
+## Getting Help
 
-### System Health Assessment
-The validation script provides:
-- Overall system health score (0-100%)
-- Detailed check results with pass/fail status
-- Actionable recommendations for fixes
-- Clear success/failure reporting
+- **Agent System Documentation**: See your external agent-system installation
+- **Lumen Documentation**: See `docs/` directory
+- **Issues**: Report in the project repository
 
-See `docs/VALIDATION_SCRIPT.md` for detailed validation documentation.
+## Development with Agent System
 
-## Installation Instructions
-
-For new projects, see the following files for setup instructions:
-
-- **Templates**: `/agent-system/templates/` - Project initialization templates
-- **Configuration**: `/agent-system/config/` - System configuration files
-- **Environment Setup**: `/agent-system/config/.env.example` - Environment variables template
-- **Hook Settings**: `/agent-system/config/hooks_settings.json` - Hook configuration
-
-Key installation points:
-1. Copy templates to project root
-2. Configure environment variables
-3. Set up hooks for quality control
-4. Initialize project structure
-5. Run validation script to verify setup
+When the agent-system hooks are properly installed, you'll have access to:
+- `/start` - Begin development sessions
+- `/end` - Complete sessions with review
+- `/check` - Run quality validation
+- `/audit` - Comprehensive project analysis
+- `/deploy` - Deployment pipeline management
 
 ## Agent Workflow
 

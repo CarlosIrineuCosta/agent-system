@@ -6,11 +6,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python /home/cdc/Storage/projects/lumen/.claude/hooks/auxiliary/root_protection.py"
+            "command": "python ~/.claude-hooks/hooks/auxiliary/root_protection.py"
           },
           {
             "type": "command",
-            "command": "python /home/cdc/Storage/projects/lumen/.claude/hooks/core/quality_gate.py"
+            "command": "python ~/.claude-hooks/hooks/core/quality_gate.py"
           }
         ]
       }
@@ -20,11 +20,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python /home/cdc/Storage/projects/lumen/.claude/hooks/core/completion_checker.py"
+            "command": "python ~/.claude-hooks/hooks/core/completion_checker.py"
           },
           {
             "type": "command",
-            "command": "python /home/cdc/Storage/projects/lumen/.claude/hooks/session/session_tracker.py"
+            "command": "python ~/.claude-hooks/hooks/session/session_tracker.py"
           }
         ]
       }

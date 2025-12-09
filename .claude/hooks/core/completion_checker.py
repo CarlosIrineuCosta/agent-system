@@ -1,1 +1,1 @@
-/home/cdc/Storage/projects/lumen/agent-system/hooks/core/completion_checker.py
+/home/cdc/Storage/projects/agent-system-standalone/hooks/core/completion_checker.py

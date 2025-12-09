@@ -137,3 +137,12 @@ screenshots/
 docs/images-test/
 frontend-deprecated/
 frontend-v2-vite-deprecated/
+
+# Prevent agent-system submodule duplicates in backup/archive directories
+**/backup_*/agent-system/
+**/archive_*/agent-system/
+**/backup_*/
+**/archive_*/
+
+# Note: agent-system should be managed as external dependency
+# See documentation for integration instructions
