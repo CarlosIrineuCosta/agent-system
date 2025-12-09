@@ -6,8 +6,8 @@
 
 ```bash
 # Clone and install
-git clone <repository-url>
-cd agent-system-standalone
+git clone https://github.com/CarlosIrineuCosta/agent-system.git
+cd agent-system
 chmod +x validate.py && ./validate.py
 ```
 
@@ -215,8 +215,8 @@ claude --version  # Optional
 ### Step 2: Clone Repository
 
 ```bash
-git clone <repository-url>
-cd agent-system-standalone
+git clone https://github.com/CarlosIrineuCosta/agent-system.git
+cd agent-system
 ```
 
 ### Step 3: Validate System

@@ -1,6 +1,6 @@
 # Claude Commands Directory
 
-This directory contains Claude slash commands for the agent-system-standalone project.
+This directory contains Claude slash commands for the agent-system project.
 
 ## Main Commands
 

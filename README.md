@@ -62,8 +62,8 @@ The system employs a multi-agent architecture with distinct roles and responsibi
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-repo/agent-system-standalone.git
-   cd agent-system-standalone
+   git clone https://github.com/CarlosIrineuCosta/agent-system.git
+   cd agent-system
    ```
 
 2. **Install dependencies**
@@ -128,7 +128,7 @@ The system employs a multi-agent architecture with distinct roles and responsibi
 ## Directory Structure
 
 ```
-agent-system-standalone/
+agent-system/
 ├── commands/                 # Executable command scripts
 ├── config/                  # System configuration files
 │   ├── agent_routing.json   # Agent routing and task mapping
