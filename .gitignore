@@ -145,4 +145,5 @@ frontend-v2-vite-deprecated/
 **/archive_*/
 
 # Note: agent-system should be managed as external dependency
-# See documentation for integration instructions
+# See documentation for integration instructionsfirebase-service-account.json
+firebase_service_account.json
