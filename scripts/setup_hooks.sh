@@ -19,6 +19,10 @@ NC='\033[0m' # No Color
 # Script configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENT_SYSTEM_DIR="$(dirname "$SCRIPT_DIR")"
+# Check if we have a consolidated agent-system structure
+if [[ -d "$AGENT_SYSTEM_DIR/agent-system" ]]; then
+    AGENT_SYSTEM_DIR="$AGENT_SYSTEM_DIR/agent-system"
+fi
 PROJECT_ROOT="$(pwd)"
 FORCE_INSTALL=false
 VERBOSE=false

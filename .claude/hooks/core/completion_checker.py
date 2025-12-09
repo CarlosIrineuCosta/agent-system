@@ -1,1 +1,0 @@
-/home/cdc/Storage/projects/agent-system-standalone/hooks/core/completion_checker.py
