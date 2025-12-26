@@ -14,7 +14,7 @@ from datetime import datetime
 # Import wrappers
 sys.path.insert(0, str(Path(__file__).parent))
 try:
-    from glm_worker import call_glm as call_glm_func
+    from glm_direct import call_glm_direct as call_glm_func
 except ImportError:
     call_glm_func = None
 
@@ -114,7 +114,7 @@ def route_and_execute(task_description, context_files=None, parallel=False):
         print(f"  - {llm.upper()}: {purpose}", file=sys.stderr)
 
         if llm == 'glm' and call_glm_func:
-            # GLM worker has different interface
+            # Direct GLM API integration
             result = call_glm_func(task_description, context_files)
             results['glm'] = result
 
