@@ -1,7 +1,33 @@
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
 .venv/
 env/
-.env
 *.log
+
+# Environment & Secrets
+.env
+*.key
+*.pem
+config/secrets/
+
+# Agent Runtime State
+.agents/
+.agents/**
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+scripts/temp/
