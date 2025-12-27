@@ -11,6 +11,13 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Any
 
+# Import task manager for integration
+try:
+    from task_manager import TaskManager
+    TASK_MANAGER_AVAILABLE = True
+except ImportError:
+    TASK_MANAGER_AVAILABLE = False
+
 
 class StateManager:
     """
@@ -212,6 +219,76 @@ class StateManager:
         pass
 
     # ========================================================================
+    # TASK TRACKING INTEGRATION
+    # ========================================================================
+
+    def get_task_summary(self) -> Optional[Dict[str, Any]]:
+        """
+        Get task summary from TaskManager.
+
+        Returns:
+            Task summary dict, or None if TaskManager unavailable.
+        """
+        if not TASK_MANAGER_AVAILABLE:
+            return None
+
+        try:
+            mgr = TaskManager()
+            return mgr.summary()
+        except Exception:
+            return None
+
+    def get_next_task(self) -> Optional[Dict[str, Any]]:
+        """
+        Get the next task to work on.
+
+        Returns:
+            Task dict, or None if no active tasks.
+        """
+        if not TASK_MANAGER_AVAILABLE:
+            return None
+
+        try:
+            mgr = TaskManager()
+            return mgr.get_next()
+        except Exception:
+            return None
+
+    def format_status_with_tasks(self) -> str:
+        """
+        Get formatted status string including task information.
+
+        Returns:
+            Multi-line status string.
+        """
+        lines = [
+            f"System Status: {self.get_status()}",
+            f"Version: {self.get_version()}"
+        ]
+
+        # Add task summary if available
+        task_summary = self.get_task_summary()
+        if task_summary:
+            lines.append("")
+            lines.append("Tasks:")
+            lines.append(f"  Total: {task_summary['total']}")
+            lines.append(f"  Pending: {task_summary['pending']}")
+            lines.append(f"  In Progress: {task_summary['in_progress']}")
+            lines.append(f"  Completed: {task_summary['completed']}")
+
+            # Show next task
+            next_task = self.get_next_task()
+            if next_task:
+                lines.append("")
+                lines.append(f"Next: {next_task['content']}")
+                lines.append(f"  Priority: {next_task['priority']}")
+        else:
+            lines.append("")
+            lines.append("Tasks: TaskManager not available")
+
+        return "\n".join(lines)
+
+    # ========================================================================
     # DIRECTORY MANAGEMENT
     # ========================================================================
 
@@ -292,7 +369,7 @@ def main():
     mgr = StateManager()
 
     if args.command == "status":
-        print(f"Status: {mgr.get_status()}")
+        print(mgr.format_status_with_tasks())
     elif args.command == "start":
         success = mgr.start()
         sys.exit(0 if success else 1)

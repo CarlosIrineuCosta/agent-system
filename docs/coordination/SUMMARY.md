@@ -8,6 +8,7 @@
 | Component | File | Purpose |
 |-----------|------|---------|
 | State Manager | `scripts/state_manager.py` | Lifecycle management (skeleton) |
+| Task Manager | `scripts/task_manager.py` | Persistent task tracking |
 | Multi-LLM Coordinator | `scripts/multi_llm_coordinator.py` | Route tasks to GLM/Codex/Gemini |
 | GLM Direct API | `scripts/glm_direct.py` | GLM-4.7 via Z.ai Anthropic-compatible endpoint |
 | Monitor | `scripts/monitor.py` | Terminal-based real-time agent monitoring |
@@ -55,6 +56,17 @@
 - **Solution:** Sandbox pattern - `agent-coordinator-dev/` for testing
 - **Tools:** `sandbox_manager.py` (create/sync/promote/status/clean)
 
+### Checkpoint 7: Documentation Cleanup (Dec 27)
+- **Action:** Removed checkpoint MD files, archived outdated docs
+- **Created:** `SUMMARY.md` (key takeaways), `INDEX.md` (docs index)
+- **Result:** Cleaner documentation structure
+
+### Checkpoint 8: Task Tracking Integration (Dec 27)
+- **Created:** `scripts/task_manager.py` (add/complete/list tasks)
+- **Storage:** `~/.claude/agent-coordinator/runtime/tasks.json`
+- **Command:** `/tasks` slash command
+- **Integration:** Task summary visible in `state_manager.py` status
+
 ## Current System State
 
 ### Working
@@ -63,6 +75,7 @@
 - Safe self-development via sandbox
 - Garbage collection utilities
 - File writing rules defined
+- Persistent task tracking with `/tasks`
 
 ### Not Working
 - `/start` and `/stop` commands (state_manager.py is skeleton only)
@@ -75,12 +88,13 @@
 ```
 agent-coordinator/
 ├── scripts/
-│   ├── multi_llm_coordinator.py    # Task routing
-│   ├── glm_direct.py                 # GLM API (Z.ai)
+│   ├── state_manager.py               # Lifecycle (skeleton)
+│   ├── task_manager.py                # Persistent task tracking
+│   ├── multi_llm_coordinator.py       # Task routing
+│   ├── glm_direct.py                  # GLM API (Z.ai)
 │   ├── monitor.py                     # Live monitoring
 │   ├── garbage_collector.py           # Cleanup
-│   ├── sandbox_manager.py             # Self-dev safety
-│   └── state_manager.py               # Lifecycle (skeleton)
+│   └── sandbox_manager.py             # Self-dev safety
 ├── config/
 │   ├── agent_routing.json             # Task → agent mapping
 │   ├── agent_rules.json               # File writing rules
@@ -89,17 +103,18 @@ agent-coordinator/
 │   ├── core/                          # Quality gates
 │   └── session/                       # Session tracking
 ├── docs/
-│   ├── architecture.md                 # System diagrams
-│   ├── coordination/                   # Working docs
-│   │   ├── SUMMARY.md                  # This file
+│   ├── architecture.md                # System diagrams
+│   ├── coordination/                  # Working docs
+│   │   ├── SUMMARY.md                 # This file
+│   │   ├── TASK_SYSTEM.md
 │   │   ├── FILE_WRITING_RULES.md
 │   │   ├── GARBAGE_COLLECTION.md
 │   │   ├── SAFE_SELF_DEVELOPMENT.md
 │   │   └── VISIBILITY_SYSTEM.md
-│   ├── SYSTEM_STATUS.md               # Task tracking
-│   └── INDEX.md                       # Docs index
-├── .agents/                           # Runtime state
-└── VERSION                            # 1.0.0
+│   ├── SYSTEM_STATUS.md              # Task tracking
+│   └── INDEX.md                      # Docs index
+├── .agents/                          # Runtime state
+└── VERSION                           # 1.0.0
 ```
 
 ## Usage
