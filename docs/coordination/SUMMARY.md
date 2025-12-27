@@ -74,6 +74,13 @@
 - **Features:** Session archiving, garbage collection on stop, GitHub update checks
 - **State:** STOPPED → STARTING → ACTIVE → STOPPING transitions
 
+### Checkpoint 10: File Writing Rules Enforcement (Dec 27)
+- **Created:** `hooks/core/file_write_validator.py`
+- **Validation:** Reads from `config/agent_rules.json`
+- **Blocks:** Root markdown files, config files, scripts, hooks
+- **Allows:** `.agents/`, `docs/coordination/`, `docs/analysis/`
+- **Hook:** PostToolUse for Write/Edit operations
+
 ## Current System State
 
 ### Working
@@ -81,21 +88,19 @@
 - Real-time monitoring with `monitor.py`
 - Safe self-development via sandbox
 - Garbage collection utilities
-- File writing rules defined
+- File writing rules defined and enforced via hooks
 - Persistent task tracking with `/tasks`
 - Lifecycle management (`/system-start`, `/system-stop`, `/system-status`)
 
 ### Not Working
 - Parallel agent execution (single-threaded only)
-- File writing rules enforcement in hooks
-- Automatic garbage collection integration
 
 ## File Structure
 
 ```
 agent-coordinator/
 ├── scripts/
-│   ├── state_manager.py               # Lifecycle (skeleton)
+│   ├── state_manager.py               # Lifecycle
 │   ├── task_manager.py                # Persistent task tracking
 │   ├── multi_llm_coordinator.py       # Task routing
 │   ├── glm_direct.py                  # GLM API (Z.ai)
@@ -107,7 +112,9 @@ agent-coordinator/
 │   ├── agent_rules.json               # File writing rules
 │   └── hooks_settings.json            # Hook config
 ├── hooks/
-│   ├── core/                          # Quality gates
+│   ├── core/
+│   │   ├── quality_gate.py            # Cross-agent review
+│   │   └── file_write_validator.py    # Path enforcement
 │   └── session/                       # Session tracking
 ├── docs/
 │   ├── architecture.md                # System diagrams

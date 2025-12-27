@@ -46,49 +46,6 @@
 
 ---
 
-### 7. Enforce File Writing Rules in Hooks
-**Goal:** Prevent agents from writing to root
-
-**Tasks:**
-- [ ] Modify `hooks/core/quality_gate.py`
-- [ ] Add validation against `config/agent_rules.json`
-- [ ] Block writes to forbidden paths
-- [ ] Test with actual agent file creation
-
-**Files to Modify:**
-- `hooks/core/quality_gate.py`
-
-**Success Criteria:**
-- Agents cannot write .md files to root
-- Clear error message when blocked
-- Allowed paths still work
-
-**Estimated Effort:** 1 hour
-
----
-
-### 8. Version Checking on Startup
-**Goal:** Notify when updates available
-
-**Tasks:**
-- [ ] Implement GitHub release check in `state_manager.py`
-- [ ] Create VERSION file in repo root
-- [ ] Test update notification on `/start`
-- [ ] Add `/check-updates` command
-
-**Files to Create/Modify:**
-- `VERSION` (1.0.0-alpha)
-- `state_manager.py` (add check_updates method)
-
-**Success Criteria:**
-- System checks GitHub on start
-- Prints notification if update available
-- Doesn't fail if GitHub unreachable
-
-**Estimated Effort:** 1 hour
-
----
-
 ## 🔵 LOW PRIORITY (Nice to Have)
 
 ### 9. Prompt Library Expansion
@@ -233,26 +190,39 @@
 
 ---
 
+### Checkpoint 10: File Writing Rules Enforcement
+- [x] Create hooks/core/file_write_validator.py
+- [x] Implement validation against config/agent_rules.json
+- [x] Block writes to forbidden paths (root markdown, config, scripts, hooks)
+- [x] Block writes to root .md files
+- [x] Allow writes to .agents/, docs/coordination/, docs/analysis/
+- [x] Test blocked writes (README.md, config/agent_routing.json)
+- [x] Test allowed writes (.agents/test.md, docs/coordination/test.md)
+- [x] Update FILE_WRITING_RULES.md documentation
+
+**Completed:** 2025-12-27
+
+---
+
 ## 📊 TASK STATISTICS
 
-- **Total Tasks:** 11 planned + 9 completed = 20
+- **Total Tasks:** 11 planned + 10 completed = 21
 - **High Priority:** 0 tasks remaining
-- **Medium Priority:** 3 tasks remaining
+- **Medium Priority:** 1 task remaining
 - **Low Priority:** 3 tasks
-- **Completed:** 9 checkpoints
-- **Estimated Remaining Effort:** 5-7 hours
+- **Completed:** 10 checkpoints
+- **Estimated Remaining Effort:** 2-3 hours
 
 ---
 
 ## 🎯 IMMEDIATE NEXT ACTIONS
 
-**For next session, pick ONE:**
+**For next session:**
 
-1. **Enforce File Writing Rules in Hooks** (Security enforcement)
-2. **Test Parallel Agent Execution** (Multi-agent concurrency)
-3. **Version Checking on Startup** (Update notifications)
+1. **Test Parallel Agent Execution** (Multi-agent concurrency)
 
-**Recommended:** Start with #1 (file writing rules), as it prevents agents from writing to unauthorized locations.
+**Remaining Medium Priority:** 1 task
+**Remaining Low Priority:** 3 tasks (optional)
 
 ---
 

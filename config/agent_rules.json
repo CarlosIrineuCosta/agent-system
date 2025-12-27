@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "description": "File writing rules for agent-coordinator - prevents agents from modifying protected files",
+
+  "forbidden_paths": {
+    "root_markdown": [
+      "README.md",
+      "LICENSE",
+      "CONTRIBUTING.md",
+      "CHANGELOG.md"
+    ],
+    "config": [
+      "config/agent_routing.json",
+      "config/hooks_settings.json",
+      "config/.env.example"
+    ],
+    "scripts": [
+      "scripts/state_manager.py",
+      "scripts/garbage_collector.py"
+    ],
+    "hooks_core": [
+      "hooks/core/quality_gate.py",
+      "hooks/core/completion_checker.py"
+    ]
+  },
+
+  "protected_paths": {
+    "require_approval": [
+      "docs/",
+      ".env",
+      ".gitignore",
+      "setup.py",
+      "requirements.txt"
+    ]
+  },
+
+  "allowed_paths": {
+    "write_freely": [
+      ".agents/",
+      "docs/coordination/",
+      "docs/analysis/",
+      ".claude/state/"
+    ],
+    "read_only": [
+      "*"
+    ]
+  },
+
+  "enforcement": {
+    "block_root_md_writes": true,
+    "require_approval_for_protected": true,
+    "allow_coordination_docs": true,
+    "allow_agent_outputs": true
+  },
+
+  "approval_prompt": "You are attempting to modify a protected file: {file_path}\n\nThis action requires user approval. Type 'yes' to proceed or 'no' to cancel.",
+  "block_message": "BLOCKED: Cannot modify protected file: {file_path}\n\nReason: {reason}\n\nAllowed write locations:\n- docs/coordination/\n- .agents/\n- docs/analysis/\n\nIf you need to modify this file, ask the user to do it manually."
+}
