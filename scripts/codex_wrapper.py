@@ -62,13 +62,14 @@ Format your response as:
 """
 
     # Build command based on available options
+    # Codex CLI takes prompt as a positional argument, not --prompt flag
     cmd = [CODEX_CLI]
 
     if model:
         cmd.extend(['--model', model])
 
-    # Add prompt
-    cmd.extend(['--prompt', prompt])
+    # Add prompt as positional argument (not --prompt flag)
+    cmd.append(prompt)
 
     try:
         result = subprocess.run(

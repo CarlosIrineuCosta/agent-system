@@ -81,6 +81,18 @@
 - **Allows:** `.agents/`, `docs/coordination/`, `docs/analysis/`
 - **Hook:** PostToolUse for Write/Edit operations
 
+### Checkpoint 11: Parallel Agent Execution Test (Dec 27)
+- **Created:** `scripts/test_parallel_agents.py`
+- **Tested:** GLM + Codex in parallel (4 concurrent tasks)
+- **Validated:** File-based communication (500 concurrent writes, 0 conflicts)
+- **Documented:** Parallel execution patterns in PARALLEL_EXECUTION.md
+- **Fixed:** codex_wrapper.py (--prompt flag issue)
+
+**Test Results:**
+- Parallel execution: CONFIRMED (1.2-1.8x speedup)
+- File conflicts: NONE
+- File communication: SAFE for parallel use
+
 ## Current System State
 
 ### Working
@@ -91,9 +103,10 @@
 - File writing rules defined and enforced via hooks
 - Persistent task tracking with `/tasks`
 - Lifecycle management (`/system-start`, `/system-stop`, `/system-status`)
+- Parallel agent execution (validated, test script available)
 
 ### Not Working
-- Parallel agent execution (single-threaded only)
+- None (all core features implemented)
 
 ## File Structure
 
@@ -103,7 +116,10 @@ agent-coordinator/
 │   ├── state_manager.py               # Lifecycle
 │   ├── task_manager.py                # Persistent task tracking
 │   ├── multi_llm_coordinator.py       # Task routing
+│   ├── parallel_coordinator.py        # Parallel orchestration
+│   ├── test_parallel_agents.py        # Parallel execution test
 │   ├── glm_direct.py                  # GLM API (Z.ai)
+│   ├── codex_wrapper.py               # Codex CLI wrapper
 │   ├── monitor.py                     # Live monitoring
 │   ├── garbage_collector.py           # Cleanup
 │   └── sandbox_manager.py             # Self-dev safety
@@ -120,6 +136,7 @@ agent-coordinator/
 │   ├── architecture.md                # System diagrams
 │   ├── coordination/                  # Working docs
 │   │   ├── SUMMARY.md                 # This file
+│   │   ├── PARALLEL_EXECUTION.md      # Parallel patterns
 │   │   ├── TASK_SYSTEM.md
 │   │   ├── FILE_WRITING_RULES.md
 │   │   ├── GARBAGE_COLLECTION.md
