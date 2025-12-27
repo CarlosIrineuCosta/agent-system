@@ -1,10 +1,14 @@
 # SYSTEM_STATUS.md
-# Multi-LLM Orchestration System - Task List
+# Single Source of Truth for Agent Coordinator Task Tracking
 
 **Last Updated:** 2025-12-27
 
+---
+
 ## 🔴 CRITICAL - System Must Look At This List
 
+**RULE:** This file is THE authoritative task source (SSOT).
+**RULE:** All other status files are snapshots/archives only.
 **RULE:** Before starting ANY work session, read this file.
 **RULE:** After completing ANY task, update this file.
 **RULE:** Never work on unlisted tasks without adding them here first.

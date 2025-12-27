@@ -3,8 +3,7 @@
 ## Quick Links
 
 - **[Summary of Checkpoints](coordination/SUMMARY.md)** - Key takeaways from all development work
-- **[System Status](SYSTEM_STATUS.md)** - Current task list and progress
-- **[Current Status](tasks_20251226.md)** - What works, what doesn't, known issues
+- **[System Status](SYSTEM_STATUS.md)** - **SSOT** - Current task list and progress
 
 ## Architecture
 
@@ -18,16 +17,21 @@
 - **[Garbage Collection](coordination/GARBAGE_COLLECTION.md)** - Cleanup policies and usage
 - **[Safe Self-Development](coordination/SAFE_SELF_DEVELOPMENT.md)** - Sandbox pattern for self-modification
 - **[Visibility System](coordination/VISIBILITY_SYSTEM.md)** - Real-time monitoring guide
+- **[Parallel Execution](coordination/PARALLEL_EXECUTION.md)** - Multi-agent coordination patterns
 
-## Task Tracking
+## File Roles
 
-- **[System Status](SYSTEM_STATUS.md)** - Master task list
-- **[Tasks 2025-12-26](tasks_20251226.md)** - Current system state
+| File | Role | Update Frequency |
+|------|------|-----------------|
+| `SYSTEM_STATUS.md` | **SSOT** - Current tasks & checkpoints | After every task |
+| `coordination/SUMMARY.md` | Checkpoint reference | When checkpoints complete |
+| `archive/tasks_*.md` | Historical snapshots (read-only) | Never |
 
 ## Archived Documentation
 
-*(Located in `archive/` directory - outdated but kept for reference)*
+*(Located in `archive/` directory - historical reference only)*
 
+- `archive/tasks_20251226.md` - System state as of 2025-12-26 (all core features completed)
 - `integration.md` - Old git submodule docs (superseded by symlink approach)
 - `FOR_CLAUDE_INSTALLATION.md` - Installation guide
 - `install-guide.md` - Duplicate installation guide
