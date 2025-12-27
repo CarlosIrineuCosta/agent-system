@@ -25,38 +25,7 @@
 
 ## 📌 MEDIUM PRIORITY
 
-### 4. Multi-User Warning in README ✅ (COMPLETED)
-**Completed:** 2025-12-26 - ALPHA warning added to README.md top
-
----
-
-### 5. Implement `/start` and `/stop` Commands
-**Goal:** Proper lifecycle management
-
-**Tasks:**
-- [ ] Implement `state_manager.py` (currently skeleton)
-- [ ] Create `/start` command in `commands/`
-- [ ] Create `/stop` command in `commands/`
-- [ ] Create `/status` command in `commands/`
-- [ ] Test state transitions (STOPPED → ACTIVE → STOPPED)
-- [ ] Integrate garbage collection into `/stop`
-
-**Files to Implement:**
-- `scripts/state_manager.py` (complete implementation)
-- `commands/start.py`
-- `commands/stop.py`
-- `commands/status.py`
-
-**Success Criteria:**
-- `/start` creates state.json and checks environment
-- `/stop` cleanly shuts down and runs cleanup
-- `/status` shows current system state
-
-**Estimated Effort:** 3-4 hours
-
----
-
-### 6. Test Parallel Agent Execution
+### 5. Test Parallel Agent Execution
 **Goal:** Run multiple agents simultaneously
 
 **Tasks:**
@@ -250,14 +219,28 @@
 
 ---
 
+### Checkpoint 9: Lifecycle Management (/start, /stop, /status)
+- [x] Implement state_manager.py core methods (load_state, save_state, start, stop)
+- [x] Implement environment verification (GLM, Codex, Gemini checks)
+- [x] Implement update checking via GitHub API
+- [x] Create commands/system-start.md
+- [x] Create commands/system-stop.md
+- [x] Create commands/system-status.md
+- [x] Test state transitions (STOPPED -> ACTIVE -> STOPPED)
+- [x] Integrate garbage collection into /stop
+
+**Completed:** 2025-12-27
+
+---
+
 ## 📊 TASK STATISTICS
 
-- **Total Tasks:** 11 planned + 8 completed = 19
+- **Total Tasks:** 11 planned + 9 completed = 20
 - **High Priority:** 0 tasks remaining
-- **Medium Priority:** 4 tasks remaining
+- **Medium Priority:** 3 tasks remaining
 - **Low Priority:** 3 tasks
-- **Completed:** 8 checkpoints
-- **Estimated Remaining Effort:** 8-11 hours
+- **Completed:** 9 checkpoints
+- **Estimated Remaining Effort:** 5-7 hours
 
 ---
 
@@ -265,11 +248,11 @@
 
 **For next session, pick ONE:**
 
-1. **Implement `/start` and `/stop` Commands** (Proper lifecycle management)
-2. **Enforce File Writing Rules in Hooks** (Security enforcement)
-3. **Test Parallel Agent Execution** (Multi-agent concurrency)
+1. **Enforce File Writing Rules in Hooks** (Security enforcement)
+2. **Test Parallel Agent Execution** (Multi-agent concurrency)
+3. **Version Checking on Startup** (Update notifications)
 
-**Recommended:** Start with #1 (lifecycle management), as it enables proper system startup/shutdown.
+**Recommended:** Start with #1 (file writing rules), as it prevents agents from writing to unauthorized locations.
 
 ---
 

@@ -67,6 +67,13 @@
 - **Command:** `/tasks` slash command
 - **Integration:** Task summary visible in `state_manager.py` status
 
+### Checkpoint 9: Lifecycle Management (Dec 27)
+- **Implemented:** `state_manager.py` (load_state, save_state, start, stop)
+- **Environment:** GLM, Codex, Gemini availability checks
+- **Commands:** `/system-start`, `/system-stop`, `/system-status`
+- **Features:** Session archiving, garbage collection on stop, GitHub update checks
+- **State:** STOPPED → STARTING → ACTIVE → STOPPING transitions
+
 ## Current System State
 
 ### Working
@@ -76,9 +83,9 @@
 - Garbage collection utilities
 - File writing rules defined
 - Persistent task tracking with `/tasks`
+- Lifecycle management (`/system-start`, `/system-stop`, `/system-status`)
 
 ### Not Working
-- `/start` and `/stop` commands (state_manager.py is skeleton only)
 - Parallel agent execution (single-threaded only)
 - File writing rules enforcement in hooks
 - Automatic garbage collection integration
@@ -118,6 +125,17 @@ agent-coordinator/
 ```
 
 ## Usage
+
+### Start the System
+```bash
+python3 scripts/state_manager.py start
+python3 scripts/state_manager.py status
+```
+
+### Stop the System
+```bash
+python3 scripts/state_manager.py stop
+```
 
 ### Run an Agent Task
 ```bash
