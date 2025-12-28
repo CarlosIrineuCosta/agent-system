@@ -1,0 +1,18 @@
+{
+  "_comment": "Configure these paths ONCE. This is the only manual configuration required.",
+  "paths": {
+    "project_root": "/home/cdc/Storage/projects/agent-coordinator",
+    "claude_config_dir": "$HOME/.claude",
+    "hooks_dir": "$HOME/.claude/hooks",
+    "commands_dir": "$HOME/.claude/commands"
+  },
+  "deployment": {
+    "vps_host": "83.172.136.127",
+    "vps_user": "root",
+    "v_project_path": "/var/www/lumenphotos"
+  },
+  "llm_providers": {
+    "enabled": ["claude", "glm", "codex"],
+    "optional": ["sambanova", "openrouter"]
+  }
+}
