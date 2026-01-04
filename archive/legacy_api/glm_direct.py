@@ -9,10 +9,10 @@ import sys
 import requests
 from typing import Optional, Dict, Any
 
-# Configuration
-API_KEY = os.environ.get('GLM_API_KEY', '')
-BASE_URL = 'https://api.z.ai/api/coding/paas/v4'
-DEFAULT_MODEL = 'glm-4.5'
+# Configuration - Uses Z.ai Anthropic-compatible endpoint
+API_KEY = os.environ.get('ANTHROPIC_AUTH_TOKEN') or os.environ.get('ZAI_API_KEY') or os.environ.get('GLM_API_KEY', '')
+BASE_URL = os.environ.get('ANTHROPIC_BASE_URL', 'https://api.z.ai/api/anthropic')
+DEFAULT_MODEL = os.environ.get('ANTHROPIC_MODEL', 'glm-4.7')
 
 
 class GLMDirectAPI:
@@ -21,16 +21,17 @@ class GLMDirectAPI:
     def __init__(self, api_key: str = None, model: str = DEFAULT_MODEL):
         self.api_key = api_key or API_KEY
         self.model = model
-        self.endpoint = f"{BASE_URL}/chat/completions"
+        self.endpoint = f"{BASE_URL}/v1/messages"
         self.headers = {
             'Content-Type': 'application/json',
-            'Authorization': f'Bearer {self.api_key}'
+            'x-api-key': self.api_key,
+            'anthropic-version': '2023-06-01'
         }
 
-    def send_message(self, message: str, thinking_mode: bool = True,
+    def send_message(self, message: str, thinking_mode: bool = False,
                      max_tokens: int = 4096, temperature: float = 0.7) -> Dict[str, Any]:
         """
-        Send a message to GLM and get response
+        Send a message to GLM via Anthropic-compatible Z.ai endpoint
 
         Returns:
             Dict with keys: success (bool), output (str), error (str, if any)
@@ -38,22 +39,21 @@ class GLMDirectAPI:
         if not self.api_key:
             return {
                 'success': False,
-                'error': 'GLM_API_KEY not set',
+                'error': 'ANTHROPIC_AUTH_TOKEN or ZAI_API_KEY not set',
                 'output': '',
                 'command': 'glm_direct'
             }
 
         payload = {
             'model': self.model,
+            'max_tokens': max_tokens,
             'messages': [
                 {'role': 'user', 'content': message}
-            ],
-            'max_tokens': max_tokens,
-            'temperature': temperature
+            ]
         }
 
-        if thinking_mode:
-            payload['thinking'] = {'type': 'enabled'}
+        if temperature != 0.7:
+            payload['temperature'] = temperature
 
         try:
             response = requests.post(
@@ -65,8 +65,8 @@ class GLMDirectAPI:
             response.raise_for_status()
             result = response.json()
 
-            if 'choices' in result and len(result['choices']) > 0:
-                content = result['choices'][0]['message']['content']
+            if 'content' in result and len(result['content']) > 0:
+                content = result['content'][0]['text']
                 return {
                     'success': True,
                     'output': content,
@@ -76,7 +76,7 @@ class GLMDirectAPI:
             else:
                 return {
                     'success': False,
-                    'error': 'Unexpected response format from GLM',
+                    'error': 'Unexpected response format from Z.ai',
                     'output': str(result),
                     'command': 'glm_direct'
                 }
